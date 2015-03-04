@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.smc.mapper.AgentMapper">
+
+<select id="list" resultType="org.smc.vo.AgentVO">
+
+select /*+INDEX_ASC(tbl_agent pk_agent_no)*/ * from tbl_agent
+
+</select>
+
+<select id="tradeList" resultType="String">
+
+select /*+INDEX_ASC(tbl_agent pk_agent_no)*/ agent_name from tbl_agent where agent_trade = '활성'
+
+</select>
+
+<insert id="insert" parameterType="String" >
+
+insert into tbl_agent (agent_no, agent_name) values (seq_agent_no.nextval, #{agent_name})
+
+</insert>
+
+<update id="modify" parameterType="org.smc.vo.AgentVO">
+
+update tbl_agent set agent_trade = #{agent_trade} where agent_no = #{agent_no}
+
+</update>
+
+</mapper>

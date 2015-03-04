@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.smc.mapper.BusinessMapper">
+
+<insert id="insert" parameterType="org.smc.vo.BusinessVO">
+
+insert into tbl_business (
+
+business_no,
+business_name,
+business_registNo,
+business_address,
+business_businessName,
+business_species,
+business_detailSpecies,
+business_email,
+business_residentNo,
+business_phoneNo,
+business_homeNo,
+business_emergencyNo,
+business_businessBirth,
+business_memo,
+business_agent
+
+)
+
+values (
+
+seq_business_no.nextval,
+#{business_name},
+#{business_registNo},
+#{business_address},
+#{business_businessName},
+#{business_species},
+#{business_detailSpecies},
+#{business_email},
+#{business_residentNo},
+#{business_phoneNo},
+#{business_homeNo},
+#{business_emergencyNo},
+#{business_businessBirth},
+#{business_memo},
+#{business_agent}
+
+)
+
+</insert>
+
+<select id="list" resultType="org.smc.vo.BusinessVO">
+
+select /*+INDEX_ASC(tbl_business business_businessbirth)*/
+
+business_no,
+business_name,
+business_agent,
+business_registNo,
+business_address,
+business_businessName,
+business_species,
+business_detailSpecies,
+business_email,
+business_residentNo,
+business_phoneNo,
+business_homeNo,
+business_emergencyNo,
+to_char(business_businessbirth, 'yyyy-mm-dd') business_businessbirth,
+business_memo
+
+from tbl_business
+
+</select>
+
+<select id="nameList" resultType="String">
+
+select business_name from tbl_business
+
+</select>
+
+<delete id="delete" parameterType="Integer">
+
+delete from tbl_business where business_no = #{business_no}
+
+</delete>
+
+<update id="modify" parameterType="org.smc.vo.BusinessVO">
+
+update tbl_business set 
+
+business_registNo = #{business_registNo},
+business_address = #{business_address},
+business_businessName = #{business_businessName},
+business_species = #{business_species},
+business_detailSpecies = #{business_detailSpecies},
+business_email = #{business_email},
+business_residentNo = #{business_residentNo},
+business_phoneNo = #{business_phoneNo},
+business_homeNo = #{business_homeNo},
+business_emergencyNo = #{business_emergencyNo},
+business_businessBirth = #{business_businessBirth},
+business_memo = #{business_memo},
+business_agent = #{business_agent} 
+
+where business_no = #{business_no}
+
+</update>
+
+</mapper>

@@ -1,0 +1,10 @@
+@CHARSET "EUC-KR";
+
+.menu{
+
+	font-weight: bolder;
+	text-align: center;
+	padding-top: 15px;
+	cursor: pointer;
+
+}
