@@ -242,24 +242,24 @@ width: 100%;
 <!-- 입고 계 -->
 <div class='col-md-6 noPadding'>
 <div class='col-md-2 background noPadding data border'>입고 계</div>
-<div class='col-md-2 data border noPadding'>12345</div>
-<div class='col-md-2 data border noPadding'>123</div>
-<div class='col-md-2 data border noPadding'>123</div>
-<div class='col-md-2 data border noPadding'>123</div>
-<div class='col-md-2 data border noPadding'>123</div>
+<div class='col-md-2 data border noPadding'>${plusSum.plus_5g }</div>
+<div class='col-md-2 data border noPadding'>${plusSum.plus_2l }</div>
+<div class='col-md-2 data border noPadding'>${plusSum.plus_05l }</div>
+<div class='col-md-2 data border noPadding'>${plusSum.plus_03l }</div>
+<div class='col-md-2 data border noPadding'>${plusSum.plus_135l }</div>
 </div>
 <div class='col-md-6 noPadding'>
-<div class='col-md-1 data noPadding border'>123</div>
-<div class='col-md-1 data noPadding border'>123</div>
-<div class='col-md-1 data noPadding border'>123</div>
-<div class='col-md-1 data noPadding border'>123</div>
-<div class='col-md-1 data noPadding border'>123</div>
-<div class='col-md-1 data noPadding border'>123</div>
-<div class='col-md-1 data noPadding border'>123</div>
-<div class='col-md-1 data noPadding border'>123</div>
-<div class='col-md-1 data noPadding border'>123</div>
-<div class='col-md-1 data noPadding border'>123</div>
-<div class='col-md-1 data border noPadding'>123</div>
+<div class='col-md-1 data noPadding border'>${plusSum.plus_5g_back_bottle }</div>
+<div class='col-md-1 data noPadding border'>${plusSum.plus_5g_back_box }</div>
+<div class='col-md-1 data noPadding border'>${plusSum.plus_135_back_bottle }</div>
+<div class='col-md-1 data noPadding border'>${plusSum.plus_135l_back_box }</div>
+<div class='col-md-1 data noPadding border'>${plusSum.plus_muchine }</div>
+<div class='col-md-1 data noPadding border'>${plusSum.plus_mcup }</div>
+<div class='col-md-1 data noPadding border'>${plusSum.plus_rcup }</div>
+<div class='col-md-1 data noPadding border'>${plusSum.plus_etc }</div>
+<div class='col-md-1 data noPadding border'>${plusSum.plus_pl_plus }</div>
+<div class='col-md-1 data noPadding border'>${plusSum.plus_pl_minus }</div>
+<div class='col-md-1 data border noPadding'>--</div>
 <div class='col-md-1 data border noPadding lBorder'>--</div>
 </div>
 
@@ -280,10 +280,6 @@ $("#date").change(function(){
 	location.href='/calculate/day/'+$(this).val();
 	
 });
-
-
-
-
 
  </script>
 

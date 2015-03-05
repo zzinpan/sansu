@@ -10,4 +10,6 @@ public interface DayMapper {
 
 	public List<PlusVO> plusList(String date);
 
+	public PlusVO plusSum(String date);
+
 }

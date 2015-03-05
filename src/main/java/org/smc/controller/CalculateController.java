@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.smc.service.DayService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,10 +17,11 @@ public class CalculateController {
 	private DayService dservice;
 
 	@RequestMapping(value="/day/{date}")
-	public String dayGET(Model model, @PathVariable("date") String date) throws Exception {
+	public String dayGET(Model model, @ModelAttribute("date") @PathVariable("date") String date) throws Exception {
 		
+		System.out.println(dservice.plusSum(date));
+		model.addAttribute("plusSum", dservice.plusSum(date));
 		model.addAttribute("plusList", dservice.plusList(date));
-		model.addAttribute("date", date);
 		
 		return "/calculate/day";
 		

@@ -57,4 +57,29 @@ select /*+INDEX_ASC(tbl_plus pk_plus_no)*/ * from tbl_plus where plus_date = #{d
 
 </select>
 
+
+<select id="plusSum" parameterType="String" resultType ="org.smc.vo.PlusVO">
+
+select
+
+sum(plus_5g) plus_5g,
+sum(plus_2l) plus_2l,
+sum(plus_05l) plus_05l,
+sum(plus_03l) plus_03l,
+sum(plus_135l) plus_135l,
+sum(plus_5g_back_bottle) plus_5g_back_bottle,
+sum(plus_5g_back_box) plus_5g_back_box,
+sum(plus_135_back_bottle) plus_135_back_bottle,
+sum(plus_135l_back_box) plus_135l_back_box,
+sum(plus_muchine) plus_muchine,
+sum(plus_mcup) plus_mcup,
+sum(plus_rcup) plus_rcup,
+sum(plus_etc) plus_etc,
+sum(plus_pl_plus) plus_pl_plus,
+sum(plus_pl_minus) plus_pl_minus
+from tbl_plus 
+
+
+</select>
+
 </mapper>
