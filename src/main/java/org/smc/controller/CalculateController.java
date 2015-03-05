@@ -2,6 +2,7 @@ package org.smc.controller;
 
 import javax.inject.Inject;
 
+import org.smc.service.BusinessService;
 import org.smc.service.DayService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,13 +16,17 @@ public class CalculateController {
 	
 	@Inject
 	private DayService dservice;
+	@Inject
+	private BusinessService bservice;
 
 	@RequestMapping(value="/day/{date}")
 	public String dayGET(Model model, @ModelAttribute("date") @PathVariable("date") String date) throws Exception {
-		
-		System.out.println(dservice.plusSum(date));
-		model.addAttribute("plusSum", dservice.plusSum(date));
+
 		model.addAttribute("plusList", dservice.plusList(date));
+		model.addAttribute("plusSum", dservice.plusSum(date));
+		model.addAttribute("minusList", dservice.minusList(date));
+		model.addAttribute("minusSum", dservice.minusSum(date));
+		model.addAttribute("nameList", bservice.nameList());
 		
 		return "/calculate/day";
 		

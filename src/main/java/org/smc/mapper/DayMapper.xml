@@ -78,8 +78,127 @@ sum(plus_etc) plus_etc,
 sum(plus_pl_plus) plus_pl_plus,
 sum(plus_pl_minus) plus_pl_minus
 from tbl_plus 
+where plus_date = #{date}
 
 
 </select>
+
+<delete id="plusRemove" parameterType="Integer">
+
+delete from tbl_plus where plus_no = #{plus_no}
+
+</delete>
+
+<update id="plusModify" parameterType="org.smc.vo.PlusVO">
+
+update tbl_plus set 
+
+plus_5g = #{plus_5g},
+plus_2l = #{plus_2l},
+plus_05l = #{plus_05l},
+plus_03l = #{plus_03l},
+plus_135l = #{plus_135l},
+plus_5g_back_bottle = #{plus_5g_back_bottle},
+plus_5g_back_box = #{plus_5g_back_box},
+plus_135_back_bottle = #{plus_135_back_bottle},
+plus_135l_back_box = #{plus_135l_back_box},
+plus_muchine = #{plus_muchine},
+plus_mcup = #{plus_mcup},
+plus_rcup = #{plus_rcup},
+plus_etc = #{plus_etc},
+plus_pl_plus = #{plus_pl_plus},
+plus_pl_minus = #{plus_pl_minus},
+plus_memo = #{plus_memo}
+
+where plus_no = #{plus_no}
+
+</update>
+
+<insert id="minusInsert" parameterType="org.smc.vo.MinusVO">
+
+insert into tbl_minus 
+(
+minus_no,
+minus_name,
+minus_agent,
+minus_5g,
+minus_2l,
+minus_05l,
+minus_03l,
+minus_135l,
+minus_5g_back_bottle,
+minus_5g_back_box,
+minus_135_back_bottle,
+minus_135l_back_box,
+minus_muchine,
+minus_mcup,
+minus_rcup,
+minus_etc,
+minus_pl_plus,
+minus_pl_minus,
+minus_memo,
+minus_date
+) 
+values 
+(
+seq_minus_no.nextval,
+#{minus_name},
+(select business_agent from tbl_business where business_name = #{minus_name}),
+#{minus_5g},
+#{minus_2l},
+#{minus_05l},
+#{minus_03l},
+#{minus_135l},
+#{minus_5g_back_bottle},
+#{minus_5g_back_box},
+#{minus_135_back_bottle},
+#{minus_135l_back_box},
+#{minus_muchine},
+#{minus_mcup},
+#{minus_rcup},
+#{minus_etc},
+#{minus_pl_plus},
+#{minus_pl_minus},
+#{minus_memo},
+#{minus_date}
+)
+
+</insert>
+
+<select id="minusList" parameterType="String" resultType="org.smc.vo.MinusVO">
+
+select /*+INDEX_ASC(tbl_minus pk_minus_no)*/ * from tbl_minus where minus_date = #{date}
+
+</select>
+
+<select id="minusSum" parameterType="String" resultType ="org.smc.vo.MinusVO">
+
+select
+
+sum(minus_5g) minus_5g,
+sum(minus_2l) minus_2l,
+sum(minus_05l) minus_05l,
+sum(minus_03l) minus_03l,
+sum(minus_135l) minus_135l,
+sum(minus_5g_back_bottle) minus_5g_back_bottle,
+sum(minus_5g_back_box) minus_5g_back_box,
+sum(minus_135_back_bottle) minus_135_back_bottle,
+sum(minus_135l_back_box) minus_135l_back_box,
+sum(minus_muchine) minus_muchine,
+sum(minus_mcup) minus_mcup,
+sum(minus_rcup) minus_rcup,
+sum(minus_etc) minus_etc,
+sum(minus_pl_plus) minus_pl_plus,
+sum(minus_pl_minus) minus_pl_minus
+from tbl_minus 
+where minus_date = #{date}
+
+</select>
+
+<delete id="minusRemove" parameterType="Integer">
+
+delete from tbl_minus where minus_no = #{minus_no}
+
+</delete>
 
 </mapper>

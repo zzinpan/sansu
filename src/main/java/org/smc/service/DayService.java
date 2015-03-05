@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.smc.mapper.DayMapper;
+import org.smc.vo.MinusVO;
 import org.smc.vo.PlusVO;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +30,6 @@ public class DayService {
 	public PlusVO plusSum(String date) {
 		
 		PlusVO pvo = dmapper.plusSum(date);
-		
-		System.out.println(pvo);
 		
 		if(pvo == null){
 			
@@ -57,6 +56,66 @@ public class DayService {
 		}
 		
 		return pvo;
+		
+	}
+
+	public void plusRemove(Integer plus_no) {
+
+		dmapper.plusRemove(plus_no);
+		
+	}
+
+	public void plusModify(PlusVO pvo) {
+
+		dmapper.plusModify(pvo);
+		
+	}
+
+	public void minusInsert(MinusVO mvo) {
+
+		dmapper.minusInsert(mvo);
+		
+	}
+
+	public List<MinusVO> minusList(String date) {
+		// TODO Auto-generated method stub
+		return dmapper.minusList(date);
+	}
+
+	public Object minusSum(String date) {
+		
+		MinusVO mvo = dmapper.minusSum(date);
+		
+		if(mvo == null){
+			
+			mvo = new MinusVO();
+			
+			mvo.setMinus_03l(0);
+			mvo.setMinus_05l(0);
+			mvo.setMinus_135_back_bottle(0);
+			mvo.setMinus_135l(0);
+			mvo.setMinus_135l_back_box(0);
+			mvo.setMinus_2l(0);
+			mvo.setMinus_5g(0);
+			mvo.setMinus_5g_back_bottle(0);
+			mvo.setMinus_5g_back_box(0);
+			mvo.setMinus_mcup(0);
+			mvo.setMinus_etc(0);
+			mvo.setMinus_muchine(0);
+			mvo.setMinus_pl_minus(0);
+			mvo.setMinus_pl_plus(0);
+			mvo.setMinus_rcup(0);
+			
+			return mvo;
+			
+		}
+		
+		return mvo;
+	}
+
+	public void minusRemove(Integer minus_no) {
+
+		dmapper.minusRemove(minus_no);
 		
 	}
 
