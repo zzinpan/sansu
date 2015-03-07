@@ -56,4 +56,11 @@ public class DayController {
 		
 	}
 	
+	@RequestMapping(value="/minus/modify", method=RequestMethod.POST)
+	public @ResponseBody void minusModifyAjax(MinusVO mvo) throws Exception {
+		
+		dservice.minusModify(mvo);
+		
+	}
+	
 }

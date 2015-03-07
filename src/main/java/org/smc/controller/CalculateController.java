@@ -26,14 +26,25 @@ public class CalculateController {
 		model.addAttribute("plusSum", dservice.plusSum(date));
 		model.addAttribute("minusList", dservice.minusList(date));
 		model.addAttribute("minusSum", dservice.minusSum(date));
+		
 		model.addAttribute("nameList", bservice.nameList());
+		
+		model.addAttribute("yesterDayStock",dservice.yesterDayStock(date));
+		model.addAttribute("toDayStock", dservice.toDayStock(date));
 		
 		return "/calculate/day";
 		
 	}
 	
-	@RequestMapping(value="/person")
-	public void personGET() throws Exception {}
+	@RequestMapping(value="/person/{date}")
+	public String personGET(Model model, @ModelAttribute("date") @PathVariable("date") String date) throws Exception {
+
+		model.addAttribute("minusList", dservice.minusList(date));
+		model.addAttribute("minusSum", dservice.minusSum(date));
+		
+		return "/calculate/person";
+		
+	}
 	
 	@RequestMapping(value="/agent")
 	public void agnetGET() throws Exception {}

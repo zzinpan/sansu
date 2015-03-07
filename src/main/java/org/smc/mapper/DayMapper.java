@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.smc.vo.MinusVO;
 import org.smc.vo.PlusVO;
+import org.smc.vo.StockVO;
 
 public interface DayMapper {
 
@@ -24,5 +25,17 @@ public interface DayMapper {
 	public MinusVO minusSum(String date);
 
 	public void minusRemove(Integer minus_no);
+
+	public void minusModify(MinusVO mvo);
+
+	public StockVO yesterDayStock(String date);
+
+	public StockVO toDayStockCalc(String date);
+
+	public StockVO toDayStock(String date);
+
+	public void stockInsert(StockVO svo);
+
+	public void stockModify(StockVO svoc);
 
 }

@@ -1,3 +1,4 @@
+<%@page import="org.springframework.web.util.WebUtils"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -80,7 +81,7 @@ padding: 0;
 
 .border{
 
-border: black solid 1px;
+border: #CCC solid 1px;
 border-right: 0;
 border-top:0;
 
@@ -88,19 +89,19 @@ border-top:0;
 
 .tBorder{
 
-border-top: black solid 1px;
+border-top: #CCC solid 1px;
 
 }
 
 .lBorder{
 
-border-left:black solid 1px;
+border-left: #CCC solid 1px;
 
 }
 
 .bBorder{
 
-border-bottom: black solid 1px;
+border-bottom: #CCC solid 1px;
 
 }
 
@@ -152,6 +153,15 @@ width: 100%;
 
 }
 
+.sumBorder{
+
+border-top: black solid 1px;
+border-bottom: black solid 1px;
+
+}
+
+
+
 </style>
 </head>
 <body>
@@ -168,7 +178,7 @@ width: 100%;
 
 
 <!-- 구분 -->
-<div class='col-md-6 noPadding background tBorder'>
+<div class='col-md-6 noPadding background tBorder' style="border-top: black solid 2px;">
 <div class='col-md-3 data border'>구분</div>
 <div class='col-md-2 data border'>5G/L</div>
 <div class='col-md-2 data border'>2.0L</div>
@@ -176,7 +186,7 @@ width: 100%;
 <div class='col-md-1 data border'>0.3L</div>
 <div class='col-md-2 data border'>13.5L</div>
 </div>
-<div class='col-md-6 noPadding background tBorder'>
+<div class='col-md-6 noPadding background tBorder' style="border-top: black solid 2px;">
 <div class='col-md-2 noPadding border'><div class='col-md-12 data noPadding bBorder'>5G/L 회수</div><div class='col-md-6 data noPadding'>공병</div><div class='col-md-6 data noPadding lBorder'>박스</div></div>
 <div class='col-md-2 noPadding border'><div class='col-md-12 noPadding data bBorder'>13.5L 회수</div><div class='col-md-6 data noPadding'>공병</div><div class='col-md-6 data noPadding lBorder'>박스</div></div>
 <div class='col-md-1 data border'>기계</div>
@@ -191,26 +201,28 @@ width: 100%;
 <!-- 전일 재고 -->
 <div class='col-md-6 noPadding'>
 <div class='col-md-3 background noPadding data border'>전일재고</div>
-<div class='col-md-2 data border noPadding'>12345</div>
-<div class='col-md-2 data border noPadding'>123</div>
-<div class='col-md-2 data border noPadding'>123</div>
-<div class='col-md-1 data border noPadding'>123</div>
-<div class='col-md-2 data border noPadding'>123</div>
+<div class='col-md-2 data border noPadding'>${yesterDayStock.stock_5g}</div>
+<div class='col-md-2 data border noPadding'>${yesterDayStock.stock_2l}</div>
+<div class='col-md-2 data border noPadding'>${yesterDayStock.stock_05l}</div>
+<div class='col-md-1 data border noPadding'>${yesterDayStock.stock_03l}</div>
+<div class='col-md-2 data border noPadding'>${yesterDayStock.stock_135l}</div>
 </div>
 <div class='col-md-6 noPadding'>
-<div class='col-md-1 data noPadding border'>123</div>
-<div class='col-md-1 data noPadding border'>123</div>
-<div class='col-md-1 data noPadding border'>123</div>
-<div class='col-md-1 data noPadding border'>123</div>
-<div class='col-md-1 data noPadding border'>123</div>
-<div class='col-md-1 data noPadding border'>123</div>
-<div class='col-md-1 data noPadding border'>123</div>
-<div class='col-md-1 data noPadding border'>123</div>
-<div class='col-md-1 data noPadding border'>123</div>
-<div class='col-md-1 data noPadding border'>123</div>
-<div class='col-md-1 data border noPadding'>123</div>
+<div class='col-md-1 data noPadding border'>${yesterDayStock.stock_5g_back_bottle}</div>
+<div class='col-md-1 data noPadding border'>${yesterDayStock.stock_5g_back_box}</div>
+<div class='col-md-1 data noPadding border'>${yesterDayStock.stock_135_back_bottle}</div>
+<div class='col-md-1 data noPadding border'>${yesterDayStock.stock_135l_back_box}</div>
+<div class='col-md-1 data noPadding border'>${yesterDayStock.stock_muchine}</div>
+<div class='col-md-1 data noPadding border'>${yesterDayStock.stock_mcup}</div>
+<div class='col-md-1 data noPadding border'>${yesterDayStock.stock_rcup}</div>
+<div class='col-md-1 data noPadding border'>${yesterDayStock.stock_etc}</div>
+<div class='col-md-1 data noPadding border'>${yesterDayStock.stock_pl_minus}</div>
+<div class='col-md-1 data noPadding border'>0</div>
+<div class='col-md-1 data border noPadding'>${yesterDayStock.stock_memo}</div>
 <div class='col-md-1 data border noPadding lBorder'>--</div>
 </div>
+
+<% Object member_id = session.getAttribute("member_id"); %>
 
 
 <!-- 당일 입고 리스트 -->
@@ -239,7 +251,16 @@ width: 100%;
 <div class='col-md-1 modData noPadding border'>${item.plus_pl_plus }</div>
 <div class='col-md-1 modData noPadding border'>${item.plus_pl_minus }</div>
 <div class='col-md-1 modData noPadding border'>${item.plus_memo }</div>
-<div class='col-md-1 data border noPadding lBorder'><button class='height20 plusDelBtn' id='${item.plus_no }'>삭제</button></div>
+<div class='col-md-1 data border noPadding lBorder'>
+<%if(member_id != null){
+if(member_id.toString().equals("nara4384")){ %>
+<button class='height20 plusDelBtn delBtn' id='${item.plus_no }'>삭제</button>
+<%}else{%>
+--
+<%}}else{%>
+--
+<%}%>
+</div>
 </div>
 </div>
 
@@ -249,35 +270,40 @@ width: 100%;
 
 
 <!-- 당일 입고 인풋 -->
-<form action="/day/plus/insert" method="POST">
+<%if(member_id != null){
+
+if(member_id.toString().equals("nara4384")){ %>
+<form id='plusInsertForm' action="/day/plus/insert" method="POST">
 <input type="hidden" name='plus_date' value='${date }'>
 <div class='col-md-6 noPadding'>
 <div class='col-md-3 background noPadding data border'>입고입력</div>
-<div class='col-md-2 data border noPadding'><input class='height20 width100' type='text' name='plus_5g'></div>
-<div class='col-md-2 data border noPadding'><input class='height20 width100' type='text' name='plus_2l'></div>
-<div class='col-md-2 data border noPadding'><input class='height20 width100' type='text' name='plus_05l'></div>
-<div class='col-md-1 data border noPadding'><input class='height20 width100' type='text' name='plus_03l'></div>
-<div class='col-md-2 data border noPadding'><input class='height20 width100' type='text' name='plus_135l'></div>
+<div class='col-md-2 data border noPadding'><input class='height20 width100 pinputs' type='text' name='plus_5g' autofocus></div>
+<div class='col-md-2 data border noPadding'><input class='height20 width100 pinputs' type='text' name='plus_2l'></div>
+<div class='col-md-2 data border noPadding'><input class='height20 width100 pinputs' type='text' name='plus_05l'></div>
+<div class='col-md-1 data border noPadding'><input class='height20 width100 pinputs' type='text' name='plus_03l'></div>
+<div class='col-md-2 data border noPadding'><input class='height20 width100 pinputs' type='text' name='plus_135l'></div>
 </div>
 <div class='col-md-6 noPadding'>
-<div class='col-md-1 data noPadding border'><input class='height20 width100' type='text' name='plus_5g_back_bottle'></div>
-<div class='col-md-1 data noPadding border'><input class='height20 width100' type='text' name='plus_5g_back_box'></div>
-<div class='col-md-1 data noPadding border'><input class='height20 width100' type='text' name='plus_135_back_bottle'></div>
-<div class='col-md-1 data noPadding border'><input class='height20 width100' type='text' name='plus_135l_back_box'></div>
-<div class='col-md-1 data noPadding border'><input class='height20 width100' type='text' name='plus_muchine'></div>
-<div class='col-md-1 data noPadding border'><input class='height20 width100' type='text' name='plus_mcup'></div>
-<div class='col-md-1 data noPadding border'><input class='height20 width100' type='text' name='plus_rcup'></div>
-<div class='col-md-1 data noPadding border'><input class='height20 width100' type='text' name='plus_etc'></div>
-<div class='col-md-1 data noPadding border'><input class='height20 width100' type='text' name='plus_pl_plus'></div>
-<div class='col-md-1 data noPadding border'><input class='height20 width100' type='text' name='plus_pl_minus'></div>
-<div class='col-md-1 data noPadding border '><input class='height20 width100' type='text' name='plus_memo'></div>
-<div class='col-md-1 data border noPadding lBorder'><input class='height20 plusBtn' type="submit" value="입력"></div>
+<div class='col-md-1 data noPadding border'><input class='height20 width100 pinputs' type='text' name='plus_5g_back_bottle'></div>
+<div class='col-md-1 data noPadding border'><input class='height20 width100 pinputs' type='text' name='plus_5g_back_box'></div>
+<div class='col-md-1 data noPadding border'><input class='height20 width100 pinputs' type='text' name='plus_135_back_bottle'></div>
+<div class='col-md-1 data noPadding border'><input class='height20 width100 pinputs' type='text' name='plus_135l_back_box'></div>
+<div class='col-md-1 data noPadding border'><input class='height20 width100 pinputs' type='text' name='plus_muchine'></div>
+<div class='col-md-1 data noPadding border'><input class='height20 width100 pinputs' type='text' name='plus_mcup'></div>
+<div class='col-md-1 data noPadding border'><input class='height20 width100 pinputs' type='text' name='plus_rcup'></div>
+<div class='col-md-1 data noPadding border'><input class='height20 width100 pinputs' type='text' name='plus_etc'></div>
+<div class='col-md-1 data noPadding border'><input class='height20 width100 pinputs' type='text' name='plus_pl_plus'></div>
+<div class='col-md-1 data noPadding border'><input class='height20 width100 pinputs' type='text' name='plus_pl_minus'></div>
+<div class='col-md-1 data noPadding border '><input class='height20 width100 pinputs' type='text' name='plus_memo'></div>
+<div class='col-md-1 data border noPadding lBorder'><input class='height20 plusBtn' type="button" value="입력"></div>
 </div>
-</form>
+</form>	
+<% }}%>
+
 
 
 <!-- 입고 계 -->
-<div class='col-md-6 noPadding'>
+<div class='col-md-6 noPadding sumBorder'>
 <div class='col-md-3 background noPadding data border'>입고 계</div>
 <div class='col-md-2 data border noPadding'>${plusSum.plus_5g }</div>
 <div class='col-md-2 data border noPadding'>${plusSum.plus_2l }</div>
@@ -285,7 +311,7 @@ width: 100%;
 <div class='col-md-1 data border noPadding'>${plusSum.plus_03l }</div>
 <div class='col-md-2 data border noPadding'>${plusSum.plus_135l }</div>
 </div>
-<div class='col-md-6 noPadding'>
+<div class='col-md-6 noPadding sumBorder'>
 <div class='col-md-1 data noPadding border'>${plusSum.plus_5g_back_bottle }</div>
 <div class='col-md-1 data noPadding border'>${plusSum.plus_5g_back_box }</div>
 <div class='col-md-1 data noPadding border'>${plusSum.plus_135_back_bottle }</div>
@@ -328,7 +354,16 @@ width: 100%;
 <div class='col-md-1 modData noPadding border'>${item.minus_pl_plus }</div>
 <div class='col-md-1 modData noPadding border'>${item.minus_pl_minus }</div>
 <div class='col-md-1 modData noPadding border'>${item.minus_memo }</div>
-<div class='col-md-1 data border noPadding lBorder'><button class='height20 minusDelBtn mBtn' id='${item.minus_no }'>삭제</button></div>
+<div class='col-md-1 data border noPadding lBorder'>
+<% if(member_id != null){
+if(member_id.toString().equals("nara4384")){ %>
+<button class='height20 minusDelBtn mBtn delBtn' id='${item.minus_no }'>삭제</button>
+<%}else{%>
+--
+<%}}else{%>
+--
+<%}%>
+</div>
 </div>
 </div>
 
@@ -338,6 +373,9 @@ width: 100%;
 
 
 <!-- 당일 출고 인풋 -->
+<% if(member_id != null){
+
+if(member_id.toString().equals("nara4384")){ %>
 <form id='minus_form' action="/day/minus/insert" method="POST">
 <input type="hidden" name='minus_date' value='${date }'>
 <div class='col-md-6 noPadding'>
@@ -350,31 +388,33 @@ width: 100%;
 </c:forEach>
 </select>
 </div>
-<div class='col-md-2 data border noPadding'><input class='height20 width100' type='text' name='minus_5g'></div>
-<div class='col-md-2 data border noPadding'><input class='height20 width100' type='text' name='minus_2l'></div>
-<div class='col-md-2 data border noPadding'><input class='height20 width100' type='text' name='minus_05l'></div>
-<div class='col-md-1 data border noPadding'><input class='height20 width100' type='text' name='minus_03l'></div>
-<div class='col-md-2 data border noPadding'><input class='height20 width100' type='text' name='minus_135l'></div>
+<div class='col-md-2 data border noPadding'><input class='height20 width100 minputs' type='text' name='minus_5g'></div>
+<div class='col-md-2 data border noPadding'><input class='height20 width100 minputs' type='text' name='minus_2l'></div>
+<div class='col-md-2 data border noPadding'><input class='height20 width100 minputs' type='text' name='minus_05l'></div>
+<div class='col-md-1 data border noPadding'><input class='height20 width100 minputs' type='text' name='minus_03l'></div>
+<div class='col-md-2 data border noPadding'><input class='height20 width100 minputs' type='text' name='minus_135l'></div>
 </div>
 <div class='col-md-6 noPadding'>
-<div class='col-md-1 data noPadding border'><input class='height20 width100' type='text' name='minus_5g_back_bottle'></div>
-<div class='col-md-1 data noPadding border'><input class='height20 width100' type='text' name='minus_5g_back_box'></div>
-<div class='col-md-1 data noPadding border'><input class='height20 width100' type='text' name='minus_135_back_bottle'></div>
-<div class='col-md-1 data noPadding border'><input class='height20 width100' type='text' name='minus_135l_back_box'></div>
-<div class='col-md-1 data noPadding border'><input class='height20 width100' type='text' name='minus_muchine'></div>
-<div class='col-md-1 data noPadding border'><input class='height20 width100' type='text' name='minus_mcup'></div>
-<div class='col-md-1 data noPadding border'><input class='height20 width100' type='text' name='minus_rcup'></div>
-<div class='col-md-1 data noPadding border'><input class='height20 width100' type='text' name='minus_etc'></div>
-<div class='col-md-1 data noPadding border'><input class='height20 width100' type='text' name='minus_pl_plus'></div>
-<div class='col-md-1 data noPadding border'><input class='height20 width100' type='text' name='minus_pl_minus'></div>
-<div class='col-md-1 data noPadding border '><input class='height20 width100' type='text' name='minus_memo'></div>
+<div class='col-md-1 data noPadding border'><input class='height20 width100 minputs' type='text' name='minus_5g_back_bottle'></div>
+<div class='col-md-1 data noPadding border'><input class='height20 width100 minputs' type='text' name='minus_5g_back_box'></div>
+<div class='col-md-1 data noPadding border'><input class='height20 width100 minputs' type='text' name='minus_135_back_bottle'></div>
+<div class='col-md-1 data noPadding border'><input class='height20 width100 minputs' type='text' name='minus_135l_back_box'></div>
+<div class='col-md-1 data noPadding border'><input class='height20 width100 minputs' type='text' name='minus_muchine'></div>
+<div class='col-md-1 data noPadding border'><input class='height20 width100 minputs' type='text' name='minus_mcup'></div>
+<div class='col-md-1 data noPadding border'><input class='height20 width100 minputs' type='text' name='minus_rcup'></div>
+<div class='col-md-1 data noPadding border'><input class='height20 width100 minputs' type='text' name='minus_etc'></div>
+<div class='col-md-1 data noPadding border'><input class='height20 width100 minputs' type='text' name='minus_pl_plus'></div>
+<div class='col-md-1 data noPadding border'><input class='height20 width100 minputs' type='text' name='minus_pl_minus'></div>
+<div class='col-md-1 data noPadding border '><input class='height20 width100 minputs' type='text' name='minus_memo'></div>
 <div class='col-md-1 data border noPadding lBorder'><input class='height20 minusBtn mBtn' type="button" value="입력"></div>
 </div>
 </form>
+<%}} %>
+
 
 
 <!-- 출고 계 -->
-<div class='col-md-6 noPadding'>
+<div class='col-md-6 noPadding sumBorder'>
 <div class='col-md-3 background noPadding data border'>출고 계</div>
 <div class='col-md-2 data border noPadding'>${minusSum.minus_5g }</div>
 <div class='col-md-2 data border noPadding'>${minusSum.minus_2l }</div>
@@ -382,7 +422,7 @@ width: 100%;
 <div class='col-md-1 data border noPadding'>${minusSum.minus_03l }</div>
 <div class='col-md-2 data border noPadding'>${minusSum.minus_135l }</div>
 </div>
-<div class='col-md-6 noPadding'>
+<div class='col-md-6 noPadding sumBorder'>
 <div class='col-md-1 data noPadding border'>${minusSum.minus_5g_back_bottle }</div>
 <div class='col-md-1 data noPadding border'>${minusSum.minus_5g_back_box }</div>
 <div class='col-md-1 data noPadding border'>${minusSum.minus_135_back_bottle }</div>
@@ -398,7 +438,29 @@ width: 100%;
 </div>
 
 
-
+<!-- 당일 재고 -->
+<div class='col-md-6 noPadding bBorder' style="border-bottom: black solid 2px;">
+<div class='col-md-3 background noPadding data border'>당일재고</div>
+<div class='col-md-2 data border noPadding'>${toDayStock.stock_5g}</div>
+<div class='col-md-2 data border noPadding'>${toDayStock.stock_2l}</div>
+<div class='col-md-2 data border noPadding'>${toDayStock.stock_05l}</div>
+<div class='col-md-1 data border noPadding'>${toDayStock.stock_03l}</div>
+<div class='col-md-2 data border noPadding'>${toDayStock.stock_135l}</div>
+</div>
+<div class='col-md-6 noPadding bBorder' style="border-bottom: black solid 2px;">
+<div class='col-md-1 data noPadding border'>${toDayStock.stock_5g_back_bottle}</div>
+<div class='col-md-1 data noPadding border'>${toDayStock.stock_5g_back_box}</div>
+<div class='col-md-1 data noPadding border'>${toDayStock.stock_135_back_bottle}</div>
+<div class='col-md-1 data noPadding border'>${toDayStock.stock_135l_back_box}</div>
+<div class='col-md-1 data noPadding border'>${toDayStock.stock_muchine}</div>
+<div class='col-md-1 data noPadding border'>${toDayStock.stock_mcup}</div>
+<div class='col-md-1 data noPadding border'>${toDayStock.stock_rcup}</div>
+<div class='col-md-1 data noPadding border'>${toDayStock.stock_etc}</div>
+<div class='col-md-1 data noPadding border'>0</div>
+<div class='col-md-1 data noPadding border'>${toDayStock.stock_pl_minus}</div>
+<div class='col-md-1 data border noPadding'>${toDayStock.stock_memo}</div>
+<div class='col-md-1 data border noPadding lBorder'>--</div>
+</div>
 
 
 
@@ -406,6 +468,24 @@ width: 100%;
 </div>
 
 <script>
+$.datepicker.regional['ko'] = {
+		  closeText: '닫기',
+		  prevText: '이전',
+		  nextText: '다음',
+		  currentText: '오늘',
+		  monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		  monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+		  dayNames: ['일','월','화','수','목','금','토'],
+		  dayNamesShort: ['일','월','화','수','목','금','토'],
+		  dayNamesMin: ['일','월','화','수','목','금','토'],
+		  weekHeader: 'Wk',
+		  dateFormat: 'yy-mm-dd',
+		  firstDay: 0,
+		  isRTL: false,
+		  showMonthAfterYear: true,
+		  yearSuffix: ''};
+		 $.datepicker.setDefaults($.datepicker.regional['ko']);
+
 
 $("#date").datepicker({ 
 	
@@ -420,6 +500,9 @@ $("#date").change(function(){
 	
 });
 
+<%if(member_id != null){
+
+	if(member_id.toString().equals("nara4384")){ %>
 $("body").on("click",".plusDelBtn",function(){
 	
 	$.ajax({
@@ -442,24 +525,59 @@ $("body").on("click",".modData",function(){
 	if(confirm("데이터를 수정 할까요??")){
 		
 		var $this = $(this);
-		var $btn = $this.parent().parent().find(".plusDelBtn");
+		var $btn = $this.parent().parent().find(".delBtn");
 		var $data = $this.parent().parent().find(".modData");
 		$(".modData").addClass("data").removeClass("modData");
 		
-		$btn.html("수정완료");
-		$btn.removeClass("plusDelBtn");
-		$btn.addClass("plusModBtn");
-		
-		$.each($data,function(index,value){
+		if($btn.hasClass("plusDelBtn")){
 			
-			var data = value.innerText;
+			$btn.removeClass("plusDelBtn");
+			$btn.addClass("plusModBtn");			
 			
-			value.innerHTML = "<input class='modInput height20 width100' value='"+data+"'>";
+			$.each($data,function(index,value){
+				
+				var data = value.innerText;
+				
+				value.innerHTML = "<input class='modInput height20 width100' value='"+data+"'>";
+				
+				
+			})
 			
+		}else if($btn.hasClass("minusDelBtn")){
 			
-		})
+			$btn.removeClass("minusDelBtn");
+			$btn.addClass("minusModBtn");	
+			
+			$.each($data,function(index,value){
+				
+				var data = value.innerText;
 
+				if(index == 0){
+					
+					var str = '';
+					
+					str += "<select id='modName' class='height20 modInput'>";
+					str += "<c:forEach items='${nameList }' var='item'>";
+					str += "<option value='${item }' >${item }</option>";
+					str += "</c:forEach>";
+					str += "</select>";
+					
+					value.innerHTML = str;
+					
+					$("#modName").val(data);
+					
+				}else{
+					
+					value.innerHTML = "<input class='modInput height20 width100' value='"+data+"'>";
+					
+				}
+				
+			})
+			
+		}
 		
+		$btn.html("수정완료");
+	
 	}
 	
 });
@@ -533,6 +651,88 @@ $("body").on("click",".minusDelBtn",function(){
 	
 });
 
+$("body").on("click",".minusModBtn",function(){
+	
+	var $input = $(".modInput");
+	
+	var data0 = $input.eq(0).val();
+	var data1 = $input.eq(1).val();
+	var data2 = $input.eq(2).val();
+	var data3 = $input.eq(3).val();
+	var data4 = $input.eq(4).val();
+	var data5 = $input.eq(5).val();
+	var data6 = $input.eq(6).val();
+	var data7 = $input.eq(7).val();
+	var data8 = $input.eq(8).val();
+	var data9 = $input.eq(9).val();
+	var data10 = $input.eq(10).val();
+	var data11 = $input.eq(11).val();
+	var data12 = $input.eq(12).val();
+	var data13 = $input.eq(13).val();
+	var data14 = $input.eq(14).val();
+	var data15 = $input.eq(15).val();
+	var data16 = $input.eq(16).val();
+	
+	$.ajax({
+		
+		url:"/day/minus/modify",
+		type:"POST",
+		data:{minus_name:data0, minus_5g:data1 ,minus_2l:data2 ,minus_05l:data3 ,minus_03l:data4 ,minus_135l:data5 ,minus_5g_back_bottle:data6 ,
+			minus_5g_back_box:data7 ,minus_135_back_bottle:data8 ,minus_135l_back_box:data9 ,minus_muchine:data10 ,
+			minus_mcup:data11 ,minus_rcup:data12 ,minus_etc:data13 ,minus_pl_plus:data14 ,minus_pl_minus:data15 ,minus_memo:data16,minus_no:$(this).attr("id")},
+		success:function(){
+			
+			location.href='/calculate/day/${date}';
+			
+		}
+		
+	})
+	
+});
+
+$(".pinputs").on("keypress",function(event){
+	
+	var $input = $(".pinputs");
+	var $this = $(this);
+	var index = $input.index($this) + 1;
+	
+	if(index == 16 && event.keyCode == 13){
+		
+		$(".plusBtn").trigger("click");
+		
+	}else if(event.keyCode == 13){
+		
+		$input.eq(index).focus();
+		
+	}
+	
+});
+
+$(".plusBtn").click(function(){
+	
+	$("#plusInsertForm").submit();
+	
+});
+
+$(".minputs").on("keypress",function(event){
+	
+	var $input = $(".minputs");
+	var $this = $(this);
+	var index = $input.index($this) + 1;
+	
+	if(index == 16 && event.keyCode == 13){
+		
+		$(".minusBtn").trigger("click");
+		
+	}else if(event.keyCode == 13){
+		
+		$input.eq(index).focus();
+		
+	}
+	
+});
+
+<%}}%>
  </script>
 
 </body>

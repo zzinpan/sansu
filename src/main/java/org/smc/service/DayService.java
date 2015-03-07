@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.smc.mapper.DayMapper;
 import org.smc.vo.MinusVO;
 import org.smc.vo.PlusVO;
+import org.smc.vo.StockVO;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -119,6 +120,35 @@ public class DayService {
 		
 	}
 
-	
-	
+	public void minusModify(MinusVO mvo) {
+
+		dmapper.minusModify(mvo);
+		
+	}
+
+	public StockVO yesterDayStock(String date) {
+		 
+		return dmapper.yesterDayStock(date);
+		
+	}
+
+	public StockVO toDayStock(String date) {
+		
+		StockVO svo = dmapper.toDayStock(date);
+		StockVO svoc = dmapper.toDayStockCalc(date);
+		
+		if(svo == null){
+
+			dmapper.stockInsert(svoc);
+			
+		}else{
+
+			dmapper.stockModify(svoc);
+			
+		}
+		
+		return svoc;
+		
+	}
+
 }

@@ -201,4 +201,182 @@ delete from tbl_minus where minus_no = #{minus_no}
 
 </delete>
 
+<update id="minusModify" parameterType="org.smc.vo.MinusVO">
+
+update tbl_minus set 
+
+minus_name = #{minus_name},
+minus_agent = (select business_agent from tbl_business where business_name = #{minus_name}),
+minus_5g = #{minus_5g},
+minus_2l = #{minus_2l},
+minus_05l = #{minus_05l},
+minus_03l = #{minus_03l},
+minus_135l = #{minus_135l},
+minus_5g_back_bottle = #{minus_5g_back_bottle},
+minus_5g_back_box = #{minus_5g_back_box},
+minus_135_back_bottle = #{minus_135_back_bottle},
+minus_135l_back_box = #{minus_135l_back_box},
+minus_muchine = #{minus_muchine},
+minus_mcup = #{minus_mcup},
+minus_rcup = #{minus_rcup},
+minus_etc = #{minus_etc},
+minus_pl_plus = #{minus_pl_plus},
+minus_pl_minus = #{minus_pl_minus},
+minus_memo = #{minus_memo}
+
+where minus_no = #{minus_no}
+
+</update>
+
+<select id="yesterDayStock" parameterType="String" resultType="org.smc.vo.StockVO">
+
+select * from tbl_stock where stock_date = (to_date(#{date})-1)
+
+</select>
+
+<select id="toDayStockCalc" parameterType="String" resultType="org.smc.vo.StockVO">
+
+select 
+(ys.stock_5g + ps.plus_5g - ms.minus_5g) stock_5g,
+(ys.stock_2l + ps.plus_2l - ms.minus_2l) stock_2l,
+(ys.stock_05l + ps.plus_05l - ms.minus_05l) stock_05l,
+(ys.stock_03l + ps.plus_03l - ms.minus_03l) stock_03l,
+(ys.stock_135l + ps.plus_135l - ms.minus_135l) stock_135l,
+(ys.stock_5g_back_bottle + ps.plus_5g_back_bottle - ms.minus_5g_back_bottle) stock_5g_back_bottle,
+(ys.stock_5g_back_box + ps.plus_5g_back_box - ms.minus_5g_back_box) stock_5g_back_box,
+(ys.stock_135_back_bottle + ps.plus_135_back_bottle - ms.minus_135_back_bottle) stock_135_back_bottle,
+(ys.stock_135l_back_box + ps.plus_135l_back_box - ms.minus_135l_back_box) stock_135l_back_box,
+(ys.stock_muchine + ps.plus_muchine - ms.minus_muchine) stock_muchine,
+(ys.stock_mcup + ps.plus_mcup - ms.minus_mcup) stock_mcup,
+(ys.stock_rcup + ps.plus_rcup - ms.minus_rcup) stock_rcup,
+(ys.stock_etc + ps.plus_etc - ms.minus_etc) stock_etc,
+(ys.stock_pl_minus + ps.plus_pl_plus + ms.minus_pl_plus - ps.plus_pl_minus - ms.minus_pl_minus) stock_pl_minus,
+#{date} stock_date
+
+
+from 
+(select * from tbl_stock where stock_date = (to_date(#{date})-1)) ys,
+(
+select
+
+nvl(sum(plus_5g),0) plus_5g,
+nvl(sum(plus_2l),0) plus_2l,
+nvl(sum(plus_05l),0) plus_05l,
+nvl(sum(plus_03l),0) plus_03l,
+nvl(sum(plus_135l),0) plus_135l,
+nvl(sum(plus_5g_back_bottle),0) plus_5g_back_bottle,
+nvl(sum(plus_5g_back_box),0) plus_5g_back_box,
+nvl(sum(plus_135_back_bottle),0) plus_135_back_bottle,
+nvl(sum(plus_135l_back_box),0) plus_135l_back_box,
+nvl(sum(plus_muchine),0) plus_muchine,
+nvl(sum(plus_mcup),0) plus_mcup,
+nvl(sum(plus_rcup),0) plus_rcup,
+nvl(sum(plus_etc),0) plus_etc,
+nvl(sum(plus_pl_plus),0) plus_pl_plus,
+nvl(sum(plus_pl_minus),0) plus_pl_minus
+from tbl_plus 
+where plus_date = #{date}
+) ps,
+
+(
+select
+
+nvl(sum(minus_5g),0) minus_5g,
+nvl(sum(minus_2l),0) minus_2l,
+nvl(sum(minus_05l),0) minus_05l,
+nvl(sum(minus_03l),0) minus_03l,
+nvl(sum(minus_135l),0) minus_135l,
+nvl(sum(minus_5g_back_bottle),0) minus_5g_back_bottle,
+nvl(sum(minus_5g_back_box),0) minus_5g_back_box,
+nvl(sum(minus_135_back_bottle),0) minus_135_back_bottle,
+nvl(sum(minus_135l_back_box),0) minus_135l_back_box,
+nvl(sum(minus_muchine),0) minus_muchine,
+nvl(sum(minus_mcup),0) minus_mcup,
+nvl(sum(minus_rcup),0) minus_rcup,
+nvl(sum(minus_etc),0) minus_etc,
+nvl(sum(minus_pl_plus),0) minus_pl_plus,
+nvl(sum(minus_pl_minus),0) minus_pl_minus
+from tbl_minus 
+where minus_date = #{date}
+
+) ms
+
+</select>
+
+<select id="toDayStock" parameterType="String" resultType="org.smc.vo.StockVO">
+
+select * from tbl_stock where stock_date = #{date}
+
+</select>
+
+<insert id="stockInsert" parameterType="org.smc.vo.StockVO">
+
+insert into tbl_stock 
+(
+stock_no,
+stock_5g,
+stock_2l,
+stock_05l,
+stock_03l,
+stock_135l,
+stock_5g_back_bottle,
+stock_5g_back_box,
+stock_135_back_bottle,
+stock_135l_back_box,
+stock_muchine,
+stock_mcup,
+stock_rcup,
+stock_etc,
+stock_pl_plus,
+stock_memo,
+stock_date
+) 
+values 
+(
+seq_stock_no.nextval,
+#{stock_5g},
+#{stock_2l},
+#{stock_05l},
+#{stock_03l},
+#{stock_135l},
+#{stock_5g_back_bottle},
+#{stock_5g_back_box},
+#{stock_135_back_bottle},
+#{stock_135l_back_box},
+#{stock_muchine},
+#{stock_mcup},
+#{stock_rcup},
+#{stock_etc},
+#{stock_pl_minus},
+#{stock_memo},
+#{stock_date}
+)
+
+</insert>
+
+<update id="stockModify" parameterType="org.smc.vo.StockVO">
+
+update tbl_stock set 
+
+stock_5g = #{stock_5g},
+stock_2l = #{stock_2l},
+stock_05l = #{stock_05l},
+stock_03l = #{stock_03l},
+stock_135l = #{stock_135l},
+stock_5g_back_bottle = #{stock_5g_back_bottle},
+stock_5g_back_box = #{stock_5g_back_box},
+stock_135_back_bottle = #{stock_135_back_bottle},
+stock_135l_back_box = #{stock_135l_back_box},
+stock_muchine = #{stock_muchine},
+stock_mcup = #{stock_mcup},
+stock_rcup = #{stock_rcup},
+stock_etc = #{stock_etc},
+stock_pl_plus = #{stock_pl_plus},
+stock_pl_minus = #{stock_pl_minus},
+stock_memo = #{stock_memo}
+
+where stock_date = #{stock_date}
+
+</update>
+
 </mapper>

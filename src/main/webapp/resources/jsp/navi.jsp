@@ -8,7 +8,7 @@
 
 <div class='col-md-2 menu move' href='/business/list'><span>업체 현황</span></div>
 <div class='col-md-2 menu move' href=''><span>일일 정산</span></div>
-<div class='col-md-2 menu move' href='/calculate/person'><span>개인별 정산</span></div>
+<div class='col-md-2 menu move' href=''><span>개인별 정산</span></div>
 <div class='col-md-2 menu login'><span>대리점 정산</span></div>
 <div class='col-md-2 menu login'><span>합계 정산</span></div>
 <div class='col-md-2 menu login'><span>로그인</span></div>
@@ -29,8 +29,10 @@ if(mm<10){
     mm='0'+mm
 } 
 var today = yyyy+'-'+mm+'-'+dd;
+var tomonth = yyyy+'-'+mm;
 
 $(".move").eq(1).attr("href","/calculate/day/"+today);
+$(".move").eq(2).attr("href","/calculate/person/"+tomonth);
 
 $("body").on("click",".move",function(){
 	
