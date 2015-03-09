@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.smc.mapper.PersonMapper">
+
+<select id="minusList7" parameterType="org.smc.vo.MinusVO" resultType="org.smc.vo.MinusVO">
+<![CDATA[
+select 
+
+sum(minus_5g) minus_5g,
+sum(minus_2l) minus_2l,
+sum(minus_05l) minus_05l,
+sum(minus_03l) minus_03l,
+sum(minus_135l) minus_135l,
+sum(minus_5g_back_bottle) minus_5g_back_bottle,
+sum(minus_5g_back_box) minus_5g_back_box,
+sum(minus_135_back_bottle) minus_135_back_bottle,
+sum(minus_135l_back_box) minus_135l_back_box,
+sum(minus_muchine) minus_muchine,
+sum(minus_mcup) minus_mcup,
+sum(minus_rcup) minus_rcup,
+sum(minus_etc) minus_etc,
+sum(minus_pl_plus) minus_pl_plus,
+sum(minus_pl_minus) minus_pl_minus,
+to_char(minus_date,'dd') minus_date
+
+ from tbl_minus 
+ where minus_date >= #{minus_date}||'-01'
+ and minus_date <= #{minus_date}||'-31' 
+ and minus_name = #{minus_name}  
+ group by minus_date
+
+]]>
+</select>
+
+<select id="minusList4" parameterType="org.smc.vo.MinusVO" resultType="org.smc.vo.MinusVO">
+<![CDATA[
+select 
+
+sum(minus_5g) minus_5g,
+sum(minus_2l) minus_2l,
+sum(minus_05l) minus_05l,
+sum(minus_03l) minus_03l,
+sum(minus_135l) minus_135l,
+sum(minus_5g_back_bottle) minus_5g_back_bottle,
+sum(minus_5g_back_box) minus_5g_back_box,
+sum(minus_135_back_bottle) minus_135_back_bottle,
+sum(minus_135l_back_box) minus_135l_back_box,
+sum(minus_muchine) minus_muchine,
+sum(minus_mcup) minus_mcup,
+sum(minus_rcup) minus_rcup,
+sum(minus_etc) minus_etc,
+sum(minus_pl_plus) minus_pl_plus,
+sum(minus_pl_minus) minus_pl_minus,
+to_char(minus_date,'mm') minus_date
+
+ from tbl_minus 
+ where minus_date >= #{minus_date}||'-01-01'
+ and minus_date <= #{minus_date}||'-12-31' 
+ and minus_name = #{minus_name}  
+ group by to_char(minus_date,'mm')
+
+]]>
+</select>
+
+<select id="minusSum7" parameterType="org.smc.vo.MinusVO" resultType="org.smc.vo.MinusVO">
+<![CDATA[
+select 
+
+sum(minus_5g) minus_5g,
+sum(minus_2l) minus_2l,
+sum(minus_05l) minus_05l,
+sum(minus_03l) minus_03l,
+sum(minus_135l) minus_135l,
+sum(minus_5g_back_bottle) minus_5g_back_bottle,
+sum(minus_5g_back_box) minus_5g_back_box,
+sum(minus_135_back_bottle) minus_135_back_bottle,
+sum(minus_135l_back_box) minus_135l_back_box,
+sum(minus_muchine) minus_muchine,
+sum(minus_mcup) minus_mcup,
+sum(minus_rcup) minus_rcup,
+sum(minus_etc) minus_etc,
+sum(minus_pl_plus) minus_pl_plus,
+sum(minus_pl_minus) minus_pl_minus
+
+ from tbl_minus 
+ where minus_date >= #{minus_date}||'-01'
+ and minus_date <= #{minus_date}||'-31' 
+ and minus_name = #{minus_name}  
+
+]]>
+</select>
+
+<select id="minusSum4" parameterType="org.smc.vo.MinusVO" resultType="org.smc.vo.MinusVO">
+<![CDATA[
+select 
+
+sum(minus_5g) minus_5g,
+sum(minus_2l) minus_2l,
+sum(minus_05l) minus_05l,
+sum(minus_03l) minus_03l,
+sum(minus_135l) minus_135l,
+sum(minus_5g_back_bottle) minus_5g_back_bottle,
+sum(minus_5g_back_box) minus_5g_back_box,
+sum(minus_135_back_bottle) minus_135_back_bottle,
+sum(minus_135l_back_box) minus_135l_back_box,
+sum(minus_muchine) minus_muchine,
+sum(minus_mcup) minus_mcup,
+sum(minus_rcup) minus_rcup,
+sum(minus_etc) minus_etc,
+sum(minus_pl_plus) minus_pl_plus,
+sum(minus_pl_minus) minus_pl_minus
+
+ from tbl_minus 
+ where minus_date >= #{minus_date}||'-01-01'
+ and minus_date <= #{minus_date}||'-12-31' 
+ and minus_name = #{minus_name}  
+
+]]>
+</select>
+
+<select id="minusSumY" parameterType="org.smc.vo.MinusVO" resultType="org.smc.vo.MinusVO">
+<![CDATA[
+select 
+
+sum(minus_5g) minus_5g,
+sum(minus_2l) minus_2l,
+sum(minus_05l) minus_05l,
+sum(minus_03l) minus_03l,
+sum(minus_135l) minus_135l,
+sum(minus_5g_back_bottle) minus_5g_back_bottle,
+sum(minus_5g_back_box) minus_5g_back_box,
+sum(minus_135_back_bottle) minus_135_back_bottle,
+sum(minus_135l_back_box) minus_135l_back_box,
+sum(minus_muchine) minus_muchine,
+sum(minus_mcup) minus_mcup,
+sum(minus_rcup) minus_rcup,
+sum(minus_etc) minus_etc,
+sum(minus_pl_plus) minus_pl_plus,
+sum(minus_pl_minus) minus_pl_minus
+
+ from tbl_minus 
+ where  minus_name = #{minus_name}  
+
+]]>
+</select>
+
+<select id="minusListY" parameterType="org.smc.vo.MinusVO" resultType="org.smc.vo.MinusVO">
+<![CDATA[
+select 
+
+sum(minus_5g) minus_5g,
+sum(minus_2l) minus_2l,
+sum(minus_05l) minus_05l,
+sum(minus_03l) minus_03l,
+sum(minus_135l) minus_135l,
+sum(minus_5g_back_bottle) minus_5g_back_bottle,
+sum(minus_5g_back_box) minus_5g_back_box,
+sum(minus_135_back_bottle) minus_135_back_bottle,
+sum(minus_135l_back_box) minus_135l_back_box,
+sum(minus_muchine) minus_muchine,
+sum(minus_mcup) minus_mcup,
+sum(minus_rcup) minus_rcup,
+sum(minus_etc) minus_etc,
+sum(minus_pl_plus) minus_pl_plus,
+sum(minus_pl_minus) minus_pl_minus,
+to_char(minus_date,'yyyy') minus_date
+
+ from tbl_minus 
+ where minus_name = #{minus_name}
+ 
+ group by to_char(minus_date,'yyyy')
+
+]]>
+</select>
+
+<select id="minusDetailList" parameterType="org.smc.vo.MinusVO" resultType="org.smc.vo.MinusVO">
+<![CDATA[
+select /*+INDEX_ASC(tbl_minus pk_minus_no)*/
+
+minus_no,
+minus_name,
+minus_agent,
+minus_5g,
+minus_2l,
+minus_05l,
+minus_03l,
+minus_135l,
+minus_5g_back_bottle,
+minus_5g_back_box,
+minus_135_back_bottle,
+minus_135l_back_box,
+minus_muchine,
+minus_mcup,
+minus_rcup,
+minus_etc,
+minus_pl_plus,
+minus_pl_minus,
+minus_memo,
+to_char(minus_date,'dd') minus_date
+
+ from tbl_minus 
+ where minus_date >= #{minus_date}||'-01'
+ and minus_date <= #{minus_date}||'-31' 
+ and minus_name = #{minus_name}  
+ order by minus_date
+]]>
+</select>
+
+<select id="dateList4" resultType="String">
+
+select to_char(minus_date,'yyyy') minus_date from tbl_minus group by to_char(minus_date,'yyyy')
+
+</select>
+
+<select id="dateList7" resultType="String">
+
+ select to_char(minus_date,'yyyy-mm') minus_date from tbl_minus group by to_char(minus_date,'yyyy-mm')
+
+</select>
+
+</mapper>

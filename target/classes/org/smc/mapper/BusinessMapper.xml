@@ -106,4 +106,16 @@ where business_no = #{business_no}
 
 </update>
 
+<select id="getVO" parameterType="String" resultType="org.smc.vo.BusinessVO">
+
+select * from tbl_business where business_name = #{name}
+
+</select>
+
+<select id='firstName' resultType="String">
+
+ select business_name from (select /*+INDEX_ASC(tbl_business pk_business_no)*/ business_name, rownum rno from tbl_business) where rno = 1
+
+</select>
+
 </mapper>

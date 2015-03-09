@@ -50,9 +50,9 @@ public class DayController {
 	}
 	
 	@RequestMapping(value="/minus/remove", method=RequestMethod.POST)
-	public @ResponseBody void minusRemoveAjax(Integer minus_no) throws Exception {
+	public @ResponseBody void minusRemoveAjax(MinusVO mvo) throws Exception {
 		
-		dservice.minusRemove(minus_no);
+		dservice.minusRemove(mvo);
 		
 	}
 	

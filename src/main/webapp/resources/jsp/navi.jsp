@@ -32,11 +32,30 @@ var today = yyyy+'-'+mm+'-'+dd;
 var tomonth = yyyy+'-'+mm;
 
 $(".move").eq(1).attr("href","/calculate/day/"+today);
-$(".move").eq(2).attr("href","/calculate/person/"+tomonth);
 
 $("body").on("click",".move",function(){
 	
-	location.href = $(this).attr("href");
+	var $this = $(this);
+	
+	if($this.index() == 2){
+		
+		$.ajax({
+			
+			url:"/person/firstName",
+			type:"POST",
+			success:function(name){
+				
+				$(".move").eq(2).attr("href","/calculate/person/"+tomonth+"/"+name);
+				location.href = $this.attr("href");
+			}
+			
+		});
+		
+	}else{
+		
+		location.href = $this.attr("href");
+		
+	}
 	
 });
 

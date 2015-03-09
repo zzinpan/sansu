@@ -16,4 +16,8 @@ public interface BusinessMapper {
 
 	public void modify(BusinessVO bvo);
 
+	public BusinessVO getVO(String name);
+
+	public String firstName();
+
 }

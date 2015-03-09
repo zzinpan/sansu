@@ -44,4 +44,14 @@ public class BusinessService {
 		
 	}
 
+	public BusinessVO getVO(String name) {
+		// TODO Auto-generated method stub
+		return bmapper.getVO(name);
+	}
+
+	public String firstName() {
+		// TODO Auto-generated method stub
+		return bmapper.firstName();
+	}
+
 }

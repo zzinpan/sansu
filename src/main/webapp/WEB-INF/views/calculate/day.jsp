@@ -174,7 +174,7 @@ border-bottom: black solid 1px;
 <span>일일 정산</span>
 </div>
 
-<div class='col-md-12'><input id='date' class='form-control' readonly="readonly" type="text" value="${date }"></div>
+<div class='col-md-12 noPadding'><input id='date' class='form-control' readonly="readonly" type="text" value="${date }"></div>
 
 
 <!-- 구분 -->

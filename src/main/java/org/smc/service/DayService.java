@@ -23,7 +23,7 @@ public class DayService {
 	}
 
 	public List<PlusVO> plusList(String date) {
-		// TODO Auto-generated method stub
+
 		return dmapper.plusList(date);
 		
 	}
@@ -76,10 +76,12 @@ public class DayService {
 
 		dmapper.minusInsert(mvo);
 		
+		toDayStock(mvo.getMinus_date());
+		
 	}
 
 	public List<MinusVO> minusList(String date) {
-		// TODO Auto-generated method stub
+		
 		return dmapper.minusList(date);
 	}
 
@@ -114,15 +116,19 @@ public class DayService {
 		return mvo;
 	}
 
-	public void minusRemove(Integer minus_no) {
+	public void minusRemove(MinusVO mvo) {
 
-		dmapper.minusRemove(minus_no);
+		dmapper.minusRemove(mvo.getMinus_no());
+		
+		toDayStock(mvo.getMinus_date());
 		
 	}
 
 	public void minusModify(MinusVO mvo) {
 
 		dmapper.minusModify(mvo);
+		
+		toDayStock(mvo.getMinus_date());
 		
 	}
 
